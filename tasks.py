@@ -12,6 +12,7 @@ import requests
 import shutil
 import uuid
 import pandas as pd
+from contextlib import suppress
 
 
 class NewsProcessor:
@@ -154,7 +155,9 @@ class NewsProcessor:
 
         # Initialize an empty list to store data
         data = []
-
+        with suppress(AssertionError):
+            browser.wait_until_element_is_visible("//*[contains(text(), 'Consent']", 45)
+            browser.click_element("//*[contains(text(), 'Consent']")
         # Extract the number of articles from the page
         num_articles_selector = "#__nuxt > div > div > main > div:nth-child(3) > div > section:nth-child(1) > div > div > div.col > div > span > strong"
         num_articles_element = page.query_selector(num_articles_selector)
