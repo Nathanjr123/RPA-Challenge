@@ -14,5 +14,5 @@ temp/
 */work-items-out/*
 testrun/*
 .~lock*
-*.pkl
-challenge.xlsx
+*.xlsx
+test.py

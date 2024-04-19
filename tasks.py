@@ -145,10 +145,8 @@ class NewsProcessor:
         # Construct and return the datetime object
         return str(year)+"_-_"+str(month_number)+"_-_"+str(day)
         
-        # Function to extract data and store in CSV file
+    # Function to extract data and store in CSV file
     def extract_and_store_data(self, page):
-        num_articles = 5  # Set the default number of articles to 5
-
         # Define the selector for the load more button
         load_more_button_selector = "#resultList > div.col > button > span.p-button-label"
 
@@ -157,17 +155,28 @@ class NewsProcessor:
         # Initialize an empty list to store data
         data = []
 
-        # Iterate through the specified number of articles
+        # Extract the number of articles from the page
+        num_articles_selector = "#__nuxt > div > div > main > div:nth-child(3) > div > section:nth-child(1) > div > div > div.col > div > span > strong"
+        num_articles_element = page.query_selector(num_articles_selector)
+        num_articles = int(num_articles_element.inner_text()) if num_articles_element else 0
+
+        # Iterate through the articles
         for i in range(1, num_articles + 1):
-            # Construct selectors for title, description, and image elements based on the index
+            # Construct selectors for title, category, description, and image elements based on the index
             title_selector = f"#resultList > div.col > div:nth-child({i}) > div > div.card-details > div.card-title > a > div"
-            
+            category_selector = f"#resultList > div.col > div:nth-child({i}) > div > div.card-details > div.card-title > span > a > div > span"
             description_selector = f"#resultList > div.col > div:nth-child({i}) > div > div.card-details > div.card-slot > p"
             image_selector = f"#resultList > div.col > div:nth-child({i}) > div > div.card-image-link.card-image-wrapper > figure:nth-child(2) > div > div > a > div > img"
 
             # Extract information for the current news item
             title_element = page.query_selector(title_selector)
             title = title_element.inner_text() if title_element else "Unknown"
+            
+            category_element = page.query_selector(category_selector)
+            category = category_element.inner_text() if category_element else "Unknown"
+
+            if self.news_category.lower() != category.lower():
+                continue  # Skip articles not in the specified category
 
             description_element = page.query_selector(description_selector)
             description = description_element.inner_text() if description_element else "Unknown"
@@ -187,10 +196,10 @@ class NewsProcessor:
             sleep(5)  # Wait for the page to load
 
             # Extract author and date of publication from the article page
-            author_element = page.query_selector("#author-selector")
+            author_element = page.query_selector("#__nuxt > div > div > main > div:nth-child(3) > section.top-section > div > div:nth-child(2) > div.col.overflow-hidden > div.block.xxl\:hidden.mb-5 > div > div.author.flex.one-author > div.flex.flex-column.gap-125 > div.v-byline > div > a")
             author = author_element.inner_text() if author_element else "Unknown"
 
-            date_element = page.query_selector("#date-selector")
+            date_element = page.query_selector("#__nuxt > div > div > main > div:nth-child(3) > section.top-section > div > div:nth-child(2) > div.col.overflow-hidden > div.block.xxl\:hidden.mb-5 > div > div.author.flex.one-author > div.flex.flex-column.gap-125 > div.date-published > p:nth-child(1)")
             date_published_string = date_element.inner_text() if date_element else "Unknown"
 
             # Parse the date string into datetime object
@@ -223,7 +232,7 @@ class NewsProcessor:
 
             # Navigate back to the main page
             page.go_back()
-            sleep(5)  # Wait for the page to load again
+            sleep(7)  # Wait for the page to load again
 
             # If it's not the last article, click on the load more button to load more articles
             if i < num_articles:
@@ -259,11 +268,11 @@ def solve_challenge():
     browser.configure(
         browser_engine="chromium",
         screenshot="only-on-failure",
-        headless=False,
+        headless=True,
     )
     try:
-        search_phrase = "Microsoft"
-        news_category = ""  # No category needed for Gothamist
+        search_phrase = "Nigeria Africa"
+        news_category = "NEWS"  # No category needed for Gothamist
         
         # Create an instance of NewsProcessor
         news_processor = NewsProcessor(browser, search_phrase, news_category)

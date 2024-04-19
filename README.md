@@ -1,61 +1,76 @@
 # Template: Python - Browser automation with Playwright
 
-This template leverages the new [Python framework](https://github.com/robocorp/robocorp), the [libraries](https://github.com/robocorp/robocorp/blob/master/docs/README.md#python-libraries) from to same project as well.
+This template leverages the new [Python framework](https://github.com/robocorp/robocorp), incorporating libraries from the same project. It's designed to provide a structured Python project with built-in logging and task control, eliminating the need to deal with underlying Python configurations. The environment includes commonly used libraries, streamlining your automation workflow. Browser automation is achieved seamlessly with `robocorp-browser` using Playwright.
 
-The template provides you with the basic structure of a Python project: logging out of the box and controlling your tasks without fiddling with the base Python stuff. The environment contains the most used libraries, so you do not have to start thinking about those right away. 
-With `robocorp-browser`, the browser automation uses Playwright without any extra steps. 
-
-👉 Other templates are available as well via our tooling and on our [Portal](https://robocorp.com/portal/tag/template)
+👉 Explore other available templates via our tooling and on our [Portal](https://robocorp.com/portal/tag/template).
 
 ## Running
 
-#### VS Code
-1. Get [Robocorp Code](https://robocorp.com/docs/developer-tools/visual-studio-code/extension-features) -extension for VS Code.
-1. You'll get an easy-to-use side panel and powerful command-palette commands for running, debugging, code completion, docs, etc.
+### Prerequisites
+- Install [Robocorp CLI (RCC)](https://github.com/robocorp/rcc?tab=readme-ov-file#getting-started).
+- Ensure you have a valid Robocorp Cloud account and API key.
 
-#### Command line
+### Setup
+1. Clone this repository to your local machine.
+2. Navigate to the project directory.
 
-1. [Get RCC](https://github.com/robocorp/rcc?tab=readme-ov-file#getting-started)
-1. Use the command: `rcc run`
+### Configuration
+- Customize the search phrase and news category in the `solve_challenge` task in the `tasks.py` file.
 
-## Results
+### Execution
+1. Open a terminal or command prompt.
+2. Run the following command to execute the automation:
+3. Sit back and relax while the bot handles the automation process.
 
-🚀 After running the bot, check out the `log.html` under the `output` -folder.
+### Results
+🚀 After executing the bot, review the `log.html` located in the `output` folder for detailed logs.
 
 ## Dependencies
 
-We strongly recommend getting familiar with adding your dependencies in [conda.yaml](conda.yaml) to control your Python dependencies and the whole Python environment for your automation.
+We strongly recommend managing your dependencies in the [conda.yaml](conda.yaml) file to control your Python environment and dependencies effectively.
 
 <details>
-  <summary>🙋‍♂️ "Why not just pip install...?"</summary>
+<summary>🙋‍♂️ "Why not just pip install...?"</summary>
 
-Think of [conda.yaml](conda.yaml) as an equivalent of the requirements.txt, but much better. 👩‍💻 With `conda.yaml`, you are not just controlling your PyPI dependencies; you control the complete Python environment, which makes things repeatable and easy.
+Think of [conda.yaml](conda.yaml) as an upgraded version of requirements.txt. With `conda.yaml`, you have full control over your Python environment, ensuring repeatability and consistency across different machines. By using `conda.yaml`:
+- Avoid "Works on my machine" scenarios.
+- Eliminate the need to manage Python installations on various machines.
+- Specify the exact Python version your automation will run on.
+- No more dependency resolution issues with pip.
+- Access the entire [conda-forge](https://prefix.dev/channels/conda-forge) ecosystem seamlessly.
 
-👉 You will probably need to run your code on another machine quite soon, so by using `conda.yaml`:
-- You can avoid `Works on my machine` -cases
-- You do not need to manage Python installations on all the machines
-- You can control exactly which version of Python your automation will run on 
-  - You'll also control the pip version to avoid dep. resolution changes
-- No need for venv, pyenv, ... tooling and knowledge sharing inside your team.
-- Define dependencies in conda.yaml, let our tooling do the heavy lifting.
-- You get all the content of [conda-forge](https://prefix.dev/channels/conda-forge) without any extra tooling
-
-> Dive deeper with [these](https://github.com/robocorp/rcc/blob/master/docs/recipes.md#what-is-in-condayaml) resources.
+> Explore further with [these](https://github.com/robocorp/rcc/blob/master/docs/recipes.md#what-is-in-condayaml) resources.
 
 </details>
 <br/>
 
-> The full power of [rpaframework](https://robocorp.com/docs/python/rpa-framework) -libraries is also available on Python as a backup while we implement the new Python libraries.
+## Object-Oriented Model
+
+The automation is structured around an object-oriented model, primarily consisting of the following components:
+- `NewsProcessor`: Responsible for processing news data.
+- `Browser`: Manages browser automation tasks.
+- `solve_challenge`: The main task to solve the RPA challenge.
+
+## Customization
+
+### Changing Search Phrase and News Category
+
+You can customize the search phrase and news category by modifying the `search_phrase` and `news_category` variables in the `solve_challenge` task located in the `tasks.py` file. Simply update these variables with the desired values before executing the automation.
+
+### Modifying Automation Logic
+
+If you need to adjust the automation logic or behavior, you can make changes directly in the `NewsProcessor` class within the `tasks.py` file. Here, you can add, remove, or modify methods to suit your requirements.
 
 ## What now?
 
-🚀 Now, go get'em
+🚀 Go ahead and tackle those challenges!
 
-Start writing Python and remember that the AI/LLM's out there are getting really good and creating Python code specifically.
+Start writing Python automation code and remember that AI/LLMs out there are becoming increasingly proficient at generating Python code tailored to specific requirements.
 
-👉 Try out [Robocorp ReMark 💬](https://chat.robocorp.com)
+👉 Give [Robocorp ReMark 💬](https://chat.robocorp.com) a try.
 
-For more information, do not forget to check out the following:
-- [Robocorp Documentation -site](https://robocorp.com/docs)
-- [Portal for more examples](https://robocorp.com/portal)
-- Follow our main [robocorp -repository](https://github.com/robocorp/robocorp) as it is the main location where we developed the libraries and the framework.
+For more information, refer to:
+- [Robocorp Documentation](https://robocorp.com/docs)
+- [Portal](https://robocorp.com/portal) for additional examples
+- Follow our main [robocorp repository](https://github.com/robocorp/robocorp) for updates on libraries and frameworks.
+
