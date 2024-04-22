@@ -328,7 +328,7 @@ def solve_challenge():
     browser.configure(
         browser_engine="chromium",
         screenshot="only-on-failure",
-        headless=True,
+        headless=False,
     )
     
     try:
