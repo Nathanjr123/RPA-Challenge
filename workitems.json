@@ -1,0 +1,9 @@
+[
+    {
+        "payload": {
+            "search_phrase": "Nigeria",
+            "news_category": "NEWS",
+            "months_range" : 10
+        }
+    }
+]
